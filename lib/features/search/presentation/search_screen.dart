@@ -24,13 +24,18 @@ class _SearchScreenState extends State<SearchScreen> {
       BehaviorSubject<String>.seeded('All');
 
   Stream<List<ProgramModel>> fetchAllProperties() {
-    return _firestore.collection('programs').snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) {
-        return ProgramModel.fromJson({
-          ...doc.data(),
-          'id': doc.id,
-        });
-      }).toList();
+    return _searchQuerySubject.stream.switchMap((query) {
+      if (query.trim().isEmpty && _categorySubject.value == 'All') {
+        return Stream.value(<ProgramModel>[]);
+      }
+      return _firestore.collection('programs').snapshots().map((snapshot) {
+        return snapshot.docs.map((doc) {
+          return ProgramModel.fromJson({
+            ...doc.data(),
+            'id': doc.id,
+          });
+        }).toList();
+      });
     });
   }
 
@@ -40,7 +45,9 @@ class _SearchScreenState extends State<SearchScreen> {
     required String category,
   }) {
     List<ProgramModel> filtered = properties;
-
+    if (query.trim().isEmpty && (category == 'All' || category.isEmpty)) {
+      return [];
+    }
     if (category.isNotEmpty && category != 'All') {
       filtered = filtered
           .where(
@@ -49,21 +56,15 @@ class _SearchScreenState extends State<SearchScreen> {
           )
           .toList();
     }
-
     if (query.isNotEmpty) {
-      filtered = filtered
-          .where(
-            (property) =>
-                property.universityName.toLowerCase().contains(
-                  query.toLowerCase(),
-                ) ||
-                property.universityName.toLowerCase().contains(
-                  query.toLowerCase(),
-                ),
-          )
-          .toList();
-    }
+      final lowerQuery = query.toLowerCase();
+      filtered = filtered.where((property) {
+        final universityMatch = property.universityName.toLowerCase().contains(lowerQuery);
+        final programMatch = property.programName.toLowerCase().contains(lowerQuery);
 
+        return universityMatch || programMatch;
+      }).toList();
+    }
     return filtered;
   }
 
@@ -111,6 +112,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CupertinoSearchTextField(
+                style: Theme.of(context).textTheme.bodyLarge,
                 decoration: BoxDecoration(
                   border: BoxBorder.all(color: Colors.grey),
                   borderRadius:BorderRadius.circular(12),
@@ -139,19 +141,24 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator(color: Colors.grey,));
+                  }
+                  if (_searchController.text.isEmpty && (_categorySubject.value == 'All')) {
+                    return DefaultMessageCard(
+                      sign: "🔍",
+                      title: l10n.startYourSearchNow,
+                      subTitle: l10n.searchWithUniversityNameOrProgramName,
+                    );
                   }
                   if (snapshot.hasError) {
                     return DefaultMessageCard(
                       sign: "!",
-                      subTitle: l10n.errorFetchingProperties,
                       title: "${l10n.error}",
                     );
                   }
                   if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return DefaultMessageCard(
                       sign: "!",
-                      subTitle: l10n.noPropertiesFound,
                       title: l10n.noResults,
                     );
                   }

@@ -40,4 +40,6 @@ class CacheKeys {
   static const String userPhone = 'user_phone';
   static const String userCharacter = 'user_character';
   static const String isOnBoardingSeen = 'is_on_boarding_seen';
+  /// True when user entered app via "Continue as Guest". Cleared on sign in / sign up.
+  static const String isGuestMode = 'is_guest_mode';
 }

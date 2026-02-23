@@ -7,8 +7,8 @@ import 'package:study_path/features/home/presentation/widgets/saved_program_sect
 import 'package:study_path/features/home/presentation/widgets/user_info_section.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../l10n/app_localizations.dart';
-
 import '../../data/model/program_model.dart';
+import '../widgets/explore_destination_section.dart';
 import '../widgets/search_section.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -59,6 +59,10 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(child: SavedProgramSection()),
+          SizedBox(height: 10),
+          SizedBox(child: ExploreDestinationSection()),
+          SizedBox(height: 20),
+
         ],
       ),
     );

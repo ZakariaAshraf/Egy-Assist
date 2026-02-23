@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+GUEST_MODE.md
+PRE_DEPLOYMENT_TEST_PLAN.md
+android/app/google-services.json
+lib/firebase_options.dart
+
+lib/core/services/ad_manger.dart

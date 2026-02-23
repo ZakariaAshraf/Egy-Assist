@@ -50,6 +50,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                try {
                  await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
                  setState(() {});
+                 Navigator.pop(context);
                } catch (e) {
                  if (kDebugMode) {
                    print(e.toString());

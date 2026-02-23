@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:study_path/core/cache/cache_helper.dart';
+import 'package:study_path/core/widgets/connectivity_overlay.dart';
 import 'package:study_path/features/favorite/cubit/favourite_cubit.dart';
 import 'package:study_path/features/notification/data/services/notification_services.dart';
 import 'package:study_path/features/settings/presentation/Cubit/user_cubit.dart';
@@ -23,14 +25,18 @@ import 'main_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
- await Firebase.initializeApp();
+  MobileAds.instance.initialize();
+  await Firebase.initializeApp();
  NotificationServices.init();
  await CacheHelper.init();
   bool? onBoarding = CacheHelper.getBool(key: CacheKeys.isOnBoardingSeen);
   String? uId = CacheHelper.getString(key: CacheKeys.uId);
+  bool? isGuestMode = CacheHelper.getBool(key: CacheKeys.isGuestMode);
   Widget startWidget;
-  if (onBoarding != null) {
+  if (onBoarding == true) {
     if (uId != null) {
+      startWidget = const MainScreen();
+    } else if (isGuestMode == true) {
       startWidget = const MainScreen();
     } else {
       startWidget = const SignIn();
@@ -87,13 +93,19 @@ class MyApp extends ConsumerWidget {
         builder: (context, child) {
           final currentTheme = Theme.of(context);
           final isDark = currentTheme.brightness == Brightness.dark;
-          return Theme(
-            data: currentTheme.copyWith(
-              textTheme: isDark
-                  ? AppTextTheme.darkTextTheme(context)
-                  : AppTextTheme.lightTextTheme(context),
+          final textDirection = locale?.languageCode == 'ar'
+              ? TextDirection.rtl
+              : TextDirection.ltr;
+          return Directionality(
+            textDirection: textDirection,
+            child: Theme(
+              data: currentTheme.copyWith(
+                textTheme: isDark
+                    ? AppTextTheme.darkTextTheme(context)
+                    : AppTextTheme.lightTextTheme(context),
+              ),
+              child: ConnectivityOverlay(child: child!),
             ),
-            child: child!,
           );
         },
         debugShowCheckedModeBanner: false,

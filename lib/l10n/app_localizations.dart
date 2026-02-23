@@ -410,7 +410,7 @@ abstract class AppLocalizations {
   /// No description provided for @searchOverDegrees.
   ///
   /// In en, this message translates to:
-  /// **'Search over 5,000 degrees'**
+  /// **'Search over 100 degrees'**
   String get searchOverDegrees;
 
   /// No description provided for @startNewSearch.
@@ -454,6 +454,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Filters'**
   String get filters;
+
+  /// No description provided for @programs.
+  ///
+  /// In en, this message translates to:
+  /// **'Programs'**
+  String get programs;
 
   /// No description provided for @whereDoYouWantToStudy.
   ///
@@ -605,6 +611,18 @@ abstract class AppLocalizations {
   /// **'View Portal'**
   String get viewPortal;
 
+  /// No description provided for @startYourSearchNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Your Search Now'**
+  String get startYourSearchNow;
+
+  /// No description provided for @searchWithUniversityNameOrProgramName.
+  ///
+  /// In en, this message translates to:
+  /// **'Search with university name or program name'**
+  String get searchWithUniversityNameOrProgramName;
+
   /// No description provided for @bookmarks.
   ///
   /// In en, this message translates to:
@@ -688,6 +706,558 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @moiAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'MOI accepted'**
+  String get moiAccepted;
+
+  /// No description provided for @aboutUniversity.
+  ///
+  /// In en, this message translates to:
+  /// **'About University'**
+  String get aboutUniversity;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City:'**
+  String get city;
+
+  /// No description provided for @notAvailableCheckWebsite.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available check website'**
+  String get notAvailableCheckWebsite;
+
+  /// No description provided for @deadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Deadline:'**
+  String get deadline;
+
+  /// No description provided for @intake.
+  ///
+  /// In en, this message translates to:
+  /// **'Intake:'**
+  String get intake;
+
+  /// No description provided for @university.
+  ///
+  /// In en, this message translates to:
+  /// **'University:'**
+  String get university;
+
+  /// No description provided for @publicUniversity.
+  ///
+  /// In en, this message translates to:
+  /// **'Public University'**
+  String get publicUniversity;
+
+  /// No description provided for @privateUniversity.
+  ///
+  /// In en, this message translates to:
+  /// **'Private University'**
+  String get privateUniversity;
+
+  /// No description provided for @languageLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Level'**
+  String get languageLevel;
+
+  /// No description provided for @requiresBlockAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Requires block account'**
+  String get requiresBlockAccount;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @requiresApsCertificate.
+  ///
+  /// In en, this message translates to:
+  /// **'Requires APS certificate'**
+  String get requiresApsCertificate;
+
+  /// No description provided for @moiPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'MOI policy'**
+  String get moiPolicy;
+
+  /// No description provided for @mostPopular.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Popular'**
+  String get mostPopular;
+
+  /// No description provided for @tuitionFees.
+  ///
+  /// In en, this message translates to:
+  /// **'TUITION FEES'**
+  String get tuitionFees;
+
+  /// No description provided for @almostFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Almost free'**
+  String get almostFree;
+
+  /// No description provided for @studentWorkHours.
+  ///
+  /// In en, this message translates to:
+  /// **'STUDENT WORK HOURS'**
+  String get studentWorkHours;
+
+  /// No description provided for @studentWorkHoursValue.
+  ///
+  /// In en, this message translates to:
+  /// **'20 H/W'**
+  String get studentWorkHoursValue;
+
+  /// No description provided for @countryOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Country Overview'**
+  String get countryOverview;
+
+  /// No description provided for @basicRequirements.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic requirements'**
+  String get basicRequirements;
+
+  /// No description provided for @stepsToStudy.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps to Study'**
+  String get stepsToStudy;
+
+  /// No description provided for @stepN.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {n}'**
+  String stepN(Object n);
+
+  /// No description provided for @linksWillHelpYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Links will help you'**
+  String get linksWillHelpYou;
+
+  /// No description provided for @embassy.
+  ///
+  /// In en, this message translates to:
+  /// **'Embassy'**
+  String get embassy;
+
+  /// No description provided for @toMakeVisaAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'To make a visa appointment'**
+  String get toMakeVisaAppointment;
+
+  /// No description provided for @vfs.
+  ///
+  /// In en, this message translates to:
+  /// **'VFS'**
+  String get vfs;
+
+  /// No description provided for @toMakeLegalizationAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'To make a legalization appointment'**
+  String get toMakeLegalizationAppointment;
+
+  /// No description provided for @embassyLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Embassy Location'**
+  String get embassyLocation;
+
+  /// No description provided for @toAttendYourAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'To attend your appointment'**
+  String get toAttendYourAppointment;
+
+  /// No description provided for @readyToStartJourney.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to start your journey ?'**
+  String get readyToStartJourney;
+
+  /// No description provided for @findOpenProgramsAndApply.
+  ///
+  /// In en, this message translates to:
+  /// **'find open programs and apply now'**
+  String get findOpenProgramsAndApply;
+
+  /// No description provided for @browsePrograms.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Programs'**
+  String get browsePrograms;
+
+  /// No description provided for @exploreDestinations.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Destinations'**
+  String get exploreDestinations;
+
+  /// No description provided for @verifyYourNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your number'**
+  String get verifyYourNumber;
+
+  /// No description provided for @getOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Otp'**
+  String get getOtp;
+
+  /// No description provided for @enterNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter number'**
+  String get enterNumber;
+
+  /// No description provided for @verify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verify;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
+
+  /// No description provided for @recommendFeature.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommend feature'**
+  String get recommendFeature;
+
+  /// No description provided for @recommendFeatureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to recommend you a feature'**
+  String get recommendFeatureMessage;
+
+  /// No description provided for @noImageToPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'No image to preview'**
+  String get noImageToPreview;
+
+  /// No description provided for @notAvailableShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available'**
+  String get notAvailableShort;
+
+  /// No description provided for @germany.
+  ///
+  /// In en, this message translates to:
+  /// **'Germany'**
+  String get germany;
+
+  /// No description provided for @austria.
+  ///
+  /// In en, this message translates to:
+  /// **'Austria'**
+  String get austria;
+
+  /// No description provided for @otherEuropeanCountries.
+  ///
+  /// In en, this message translates to:
+  /// **'Other European Countries'**
+  String get otherEuropeanCountries;
+
+  /// No description provided for @apsCertificateForEgyptians.
+  ///
+  /// In en, this message translates to:
+  /// **'might require APS certificate for Egyptians'**
+  String get apsCertificateForEgyptians;
+
+  /// No description provided for @computerScience.
+  ///
+  /// In en, this message translates to:
+  /// **'Computer Science'**
+  String get computerScience;
+
+  /// No description provided for @business.
+  ///
+  /// In en, this message translates to:
+  /// **'Business'**
+  String get business;
+
+  /// No description provided for @englishRequirementsNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'English requirements not available'**
+  String get englishRequirementsNotAvailable;
+
+  /// No description provided for @germanLevelNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'German level not available'**
+  String get germanLevelNotAvailable;
+
+  /// No description provided for @semesters.
+  ///
+  /// In en, this message translates to:
+  /// **'semesters'**
+  String get semesters;
+
+  /// No description provided for @cairo.
+  ///
+  /// In en, this message translates to:
+  /// **'Cairo'**
+  String get cairo;
+
+  /// No description provided for @germanyDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Germany offers world-class education with little or no tuition fees at public universities. Known for its strong engineering, research excellence, and robust economy, it is one of the top destinations for international students. Graduates also benefit from excellent post-study work opportunities.'**
+  String get germanyDescription;
+
+  /// No description provided for @germanyReq1.
+  ///
+  /// In en, this message translates to:
+  /// **'APS Certificate (mandatory for Egyptian students)'**
+  String get germanyReq1;
+
+  /// No description provided for @germanyReq2.
+  ///
+  /// In en, this message translates to:
+  /// **'Bachelor program: High school certificate + transcripts (translated & legalized)'**
+  String get germanyReq2;
+
+  /// No description provided for @germanyReq3.
+  ///
+  /// In en, this message translates to:
+  /// **'Master program: Bachelor certificate + transcripts (translated & legalized)'**
+  String get germanyReq3;
+
+  /// No description provided for @germanyReq4.
+  ///
+  /// In en, this message translates to:
+  /// **'Language certificate (IELTS / TOEFL / TestDaF) depending on program'**
+  String get germanyReq4;
+
+  /// No description provided for @germanyReq5.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked account with approx. 11,208 EUR per year'**
+  String get germanyReq5;
+
+  /// No description provided for @germanyStep1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your program and university'**
+  String get germanyStep1Title;
+
+  /// No description provided for @germanyStep1Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for suitable programs and check admission requirements. Apply either through Uni-Assist or directly via the university portal.'**
+  String get germanyStep1Desc;
+
+  /// No description provided for @germanyStep2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply and receive admission'**
+  String get germanyStep2Title;
+
+  /// No description provided for @germanyStep2Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare translated and legalized documents. Submit before deadlines and wait for acceptance letter.'**
+  String get germanyStep2Desc;
+
+  /// No description provided for @germanyStep3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Open blocked account & apply for visa'**
+  String get germanyStep3Title;
+
+  /// No description provided for @germanyStep3Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'After receiving admission and APS certificate, open a blocked account and book an appointment at the German Embassy in Cairo.'**
+  String get germanyStep3Desc;
+
+  /// No description provided for @austriaDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Austria offers high-quality education in the heart of Europe with affordable tuition fees at public universities. Many programs are taught in German, and students benefit from a safe environment, strong academic reputation, and central European lifestyle.'**
+  String get austriaDescription;
+
+  /// No description provided for @austriaReq1.
+  ///
+  /// In en, this message translates to:
+  /// **'Bachelor program: High school certificate + transcripts (translated & legalized)'**
+  String get austriaReq1;
+
+  /// No description provided for @austriaReq2.
+  ///
+  /// In en, this message translates to:
+  /// **'Master program: Bachelor certificate + transcripts (translated & legalized)'**
+  String get austriaReq2;
+
+  /// No description provided for @austriaReq3.
+  ///
+  /// In en, this message translates to:
+  /// **'German language certificate (usually B2 level) or English certificate depending on program'**
+  String get austriaReq3;
+
+  /// No description provided for @austriaReq4.
+  ///
+  /// In en, this message translates to:
+  /// **'Proof of sufficient financial means (approx. 8,000–12,000 EUR per year depending on age)'**
+  String get austriaReq4;
+
+  /// No description provided for @austriaReq5.
+  ///
+  /// In en, this message translates to:
+  /// **'Residence Permit – Student application'**
+  String get austriaReq5;
+
+  /// No description provided for @austriaStep1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your program and university'**
+  String get austriaStep1Title;
+
+  /// No description provided for @austriaStep1Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for suitable programs and check specific language and admission requirements on the university website.'**
+  String get austriaStep1Desc;
+
+  /// No description provided for @austriaStep2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit application'**
+  String get austriaStep2Title;
+
+  /// No description provided for @austriaStep2Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare translated and legalized documents and apply directly through the university portal.'**
+  String get austriaStep2Desc;
+
+  /// No description provided for @austriaStep3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply for Residence Permit – Student'**
+  String get austriaStep3Title;
+
+  /// No description provided for @austriaStep3Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'After receiving admission, book an appointment at the Austrian Embassy in Cairo and apply for the residence permit.'**
+  String get austriaStep3Desc;
+
+  /// No description provided for @aboutUs.
+  ///
+  /// In en, this message translates to:
+  /// **'About Us'**
+  String get aboutUs;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @termsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions'**
+  String get termsAndConditions;
+
+  /// No description provided for @aboutUsContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Egy Assist helps you discover Master\'s programs across Europe. We provide filters by country, field of study, language, and requirements so you can find the right program and apply with confidence.\n\nOur goal is to make European higher education accessible and clear for students worldwide.'**
+  String get aboutUsContent;
+
+  /// No description provided for @privacyPolicyContent.
+  ///
+  /// In en, this message translates to:
+  /// **'We respect your privacy. This app stores your account data and preferences to provide a personalized experience. We do not sell your data to third parties.\n\nData we may collect or store: account information (name, email, phone), saved programs, and app preferences. You can delete your account at any time from Settings.\n\nFor questions about data use, contact us through the app.'**
+  String get privacyPolicyContent;
+
+  /// No description provided for @termsAndConditionsContent.
+  ///
+  /// In en, this message translates to:
+  /// **'By using Egy Assist you agree to use the app for personal, non-commercial purposes. Program information is provided for guidance; always verify details on official university websites before applying.\n\nWe are not responsible for admission decisions, visa outcomes, or changes to program requirements. You are responsible for the accuracy of your applications and compliance with local laws.'**
+  String get termsAndConditionsContent;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountWarningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account?'**
+  String get deleteAccountWarningTitle;
+
+  /// No description provided for @deleteAccountWarningMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete your account and all your data (profile, saved programs). You will not be able to recover it. This action cannot be undone.'**
+  String get deleteAccountWarningMessage;
+
+  /// No description provided for @deleteAccountConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete my account'**
+  String get deleteAccountConfirm;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @deleteAccountSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Account deleted successfully'**
+  String get deleteAccountSuccess;
+
+  /// No description provided for @deleteAccountRequireRecentLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'For security, please sign out and sign in again, then try deleting your account.'**
+  String get deleteAccountRequireRecentLogin;
+
+  /// No description provided for @guestCreateAccountToAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'You must create an account to access this section.'**
+  String get guestCreateAccountToAccess;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:study_path/core/widgets/custom_button.dart';
 import 'package:study_path/core/widgets/custom_toast_widget.dart';
+import '../../../../l10n/app_localizations.dart';
 
 import '../../../../core/utils/app_colors.dart';
 
@@ -16,7 +17,7 @@ class OtpAuthentication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -40,13 +41,13 @@ class OtpAuthentication extends StatelessWidget {
             ),
           ),
           CustomButton(
-            title: "Verify",
+            title: l10n.verify,
             onTap: () async {
               String input = pinController.text;
               if (input.isEmpty) {
                 CustomToastWidget.show(
                   context: context,
-                  title: "Enter number",
+                  title: l10n.enterNumber,
                   iconPath: "assets/icons/icon.png",
                 );
               } else {
@@ -58,7 +59,7 @@ class OtpAuthentication extends StatelessWidget {
                   await auth.signInWithCredential(credential);
                   CustomToastWidget.show(
                     context: context,
-                    title: "Success",
+                    title: l10n.success,
                     iconPath: "assets/icons/icon.png",
                   );
                 } on Exception catch (e) {

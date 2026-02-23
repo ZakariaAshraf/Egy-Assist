@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:study_path/core/utils/screen_util.dart';
+import 'package:study_path/core/widgets/feature_container.dart';
+import '../../../../core/services/ad_manger.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/utils/extenstions.dart';
 import '../../../../core/widgets/custom_button.dart';
@@ -10,17 +13,51 @@ import '../../../home/data/model/program_model.dart';
 import '../widgets/feature_tile.dart';
 import '../widgets/link_previewer.dart';
 
-class ProgramDetailsScreen extends StatelessWidget {
+class ProgramDetailsScreen extends StatefulWidget {
   final ProgramModel program;
 
   const ProgramDetailsScreen({super.key, required this.program});
 
   @override
+  State<ProgramDetailsScreen> createState() => _ProgramDetailsScreenState();
+}
+
+class _ProgramDetailsScreenState extends State<ProgramDetailsScreen> {
+  bool _isLoading = true;
+  BannerAd? _bannerAd;
+  bool _isLoaded = false;
+  @override
+  void initState() {
+    super.initState();
+    _bannerAd = BannerAd(
+      adUnitId: AdManger.bannerDetailsScreen,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          setState(() {
+            _isLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          ad.dispose();
+        },
+      ),
+    )..load();
+    Future.delayed(const Duration(seconds: 1), () {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+  @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(program.programName), centerTitle: true),
+      appBar: AppBar(title: Text(widget.program.programName), centerTitle: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -30,11 +67,11 @@ class ProgramDetailsScreen extends StatelessWidget {
               Stack(
                 children: [
                   LinkPreviewer(
-                    url: program.websiteLink ?? program.applyLink,
+                    url: widget.program.websiteLink ?? widget.program.applyLink,
                     // imageHeight: 200,
                     // imageWidth: 200,
                   ),
-                  if (program.moiAccepted)
+                  if (widget.program.moiAccepted)
                     Positioned(
                       left: 10,
                       top: 10,
@@ -50,7 +87,7 @@ class ProgramDetailsScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              "MOI accepted",
+                              l10n.moiAccepted,
                               style: theme.bodyMedium!.copyWith(
                                 color: Colors.green,
                               ),
@@ -72,11 +109,11 @@ class ProgramDetailsScreen extends StatelessWidget {
                       builder: (context, state) {
                         final isFavorite = context
                             .read<FavouriteCubit>()
-                            .isFavorite(program.id ?? "");
+                            .isFavorite(widget.program.id ?? "");
                         return InkWell(
                           onTap: () async {
                             await context.read<FavouriteCubit>().addToFavourite(
-                              program,
+                              widget.program,
                             );
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -115,7 +152,7 @@ class ProgramDetailsScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 8.h(context)),
-              Text(program.universityName, style: theme.titleLarge),
+              Text(widget.program.universityName, style: theme.titleLarge),
               SizedBox(height: 5.h(context)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -123,7 +160,7 @@ class ProgramDetailsScreen extends StatelessWidget {
                   Icon(Icons.pin_drop, color: Colors.red),
                   SizedBox(width: 10.w(context)),
                   Text(
-                    program.country,
+                    widget.program.country,
                     style: theme.bodyMedium!.copyWith(color: Colors.grey),
                   ),
                 ],
@@ -133,150 +170,46 @@ class ProgramDetailsScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        width: 110.w(context),
-                        height: 140.h(context),
-                        // margin: EdgeInsets.only(left: 7),
-                        decoration: BoxDecoration(
-                          border: BoxBorder.all(color: Colors.grey.shade300),
-                          // color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              child: Icon(
-                                CupertinoIcons.money_dollar,
-                                color: Colors.green,
-                              ),
-                            ),
-                            SizedBox(height: 10.h(context)),
-                            Text(
-                              "TUITION",
-                              style: theme.bodySmall!.copyWith(
-                                fontSize: 14.sp(context),
-                              ),
-                            ),
-                            SizedBox(height: 2.h(context)),
-                            Text(
-                              "${program.tuitionFees ?? l10n.notAvailable}",
-                              style: theme.titleMedium!.copyWith(
-                                fontSize: 17.sp(context),
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
+                    FeatureContainer(
+                      icon: CupertinoIcons.money_euro,
+                      featureTitle: l10n.tuition,
+                      data: "${widget.program.tuitionFees ?? l10n.notAvailable}",
+                      iconColor: Colors.green,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        // width: 110.w(context),
-                        height: 140.h(context),
-                        // margin: EdgeInsets.only(left: 7),
-                        decoration: BoxDecoration(
-                          border: BoxBorder.all(color: Colors.grey.shade300),
-                          // color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              child: Icon(
-                                CupertinoIcons.globe,
-                                color: Colors.blueAccent,
-                              ),
-                            ),
-                            SizedBox(height: 10.h(context)),
-                            Text(
-                              l10n.language,
-                              style: theme.bodySmall!.copyWith(
-                                fontSize: 14.sp(context),
-                              ),
-                            ),
-                            SizedBox(height: 2.h(context)),
-                            Text(
-                              program.language ?? l10n.countryLanguage,
-                              style: theme.titleMedium!.copyWith(
-                                fontSize: 17.sp(context),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    FeatureContainer(
+                      icon: CupertinoIcons.globe,
+                      featureTitle: l10n.language,
+                      data: widget.program.language ?? l10n.countryLanguage,
+                      iconColor: Colors.blueAccent,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        // width: 110.w(context),
-                        height: 140.h(context),
-                        // margin: EdgeInsets.only(left: 7),
-                        decoration: BoxDecoration(
-                          border: BoxBorder.all(color: Colors.grey.shade300),
-                          // color: Colors.grey.shade600 ,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              child: Icon(
-                                CupertinoIcons.time_solid,
-                                color: Colors.orange,
-                              ),
-                            ),
-                            SizedBox(height: 10.h(context)),
-                            Text(
-                              l10n.duration,
-                              style: theme.bodySmall!.copyWith(
-                                fontSize: 14.sp(context),
-                              ),
-                            ),
-                            SizedBox(height: 2.h(context)),
-                            Text(
-                              program.duration ?? l10n.notAvailable,
-                              style: theme.titleMedium!.copyWith(
-                                fontSize: 17.sp(context),
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
+                    FeatureContainer(
+                      icon: CupertinoIcons.time_solid,
+                      featureTitle: l10n.duration,
+                      data: "${widget.program.duration ?? l10n.notAvailable} ${l10n.semesters}",
+                      iconColor: Colors.orange,
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 8.h(context)),
               _buildAboutSection(
-                city: program.city,
-                deadline: program.deadline,
-                intake: program.intake,
-                isPublicUniversity: program.isPublicUniversity,
+                city: widget.program.city,
+                deadline: widget.program.deadline,
+                intake: widget.program.intake,
+                isPublicUniversity: widget.program.isPublicUniversity,
                 context: context,
               ),
               SizedBox(height: 8.h(context)),
               _buildAdmissionRequirementsSection(
                 context: context,
-                country: program.country,
-                germanLevel: program.germanLevel,
-                ieltsRequirement: program.ieltsRequirement,
-                toeflRequirement: program.toeflRequirement,
-                moiPolicy: program.moiPolicy,
-                requiresAPS: program.requiresAps,
-                requiresBlockedAccount: program.requiresBlockedAccount,
-                moiAccepted: program.moiAccepted,
+                country: widget.program.country,
+                germanLevel: widget.program.germanLevel,
+                ieltsRequirement: widget.program.ieltsRequirement,
+                toeflRequirement: widget.program.toeflRequirement,
+                moiPolicy: widget.program.moiPolicy,
+                requiresAPS: widget.program.requiresAps,
+                requiresBlockedAccount: widget.program.requiresBlockedAccount,
+                moiAccepted: widget.program.moiAccepted,
               ),
               SizedBox(height: 30.h(context)),
               Row(
@@ -292,7 +225,7 @@ class ProgramDetailsScreen extends StatelessWidget {
                       isInvert: false,
                       onTap: () async {
                         await launchUrls(
-                          program.websiteLink ?? program.applyLink,
+                          widget.program.websiteLink ?? widget.program.applyLink,
                         );
                       },
                       color: Colors.white,
@@ -307,13 +240,20 @@ class ProgramDetailsScreen extends StatelessWidget {
                       ),
                       title: l10n.viewPortal,
                       onTap: () async {
-                        await launchUrls(program.applyLink);
+                        await launchUrls(widget.program.applyLink);
                       },
                       color: Colors.black,
                     ),
                   ),
                 ],
               ),
+              SizedBox(height: 20.h(context)),
+              if (_isLoaded)
+                SizedBox(
+                  height: _bannerAd!.size.height.toDouble(),
+                  width: _bannerAd!.size.width.toDouble(),
+                  child: AdWidget(ad: _bannerAd!),
+                ),
             ],
           ),
         ),
@@ -329,10 +269,11 @@ class ProgramDetailsScreen extends StatelessWidget {
     required BuildContext context,
   }) {
     var theme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text("About University", style: theme.titleLarge),
+        Text(l10n.aboutUniversity, style: theme.titleLarge),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -340,7 +281,6 @@ class ProgramDetailsScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  // Icon(Icons.location_city,color: Colors.blueAccent,),
                   Text(
                     "📍 ",
                     style: theme.bodySmall!.copyWith(
@@ -349,19 +289,18 @@ class ProgramDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "City:",
+                    l10n.city,
                     style: theme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 15.sp(context),
                     ),
                   ),
                   SizedBox(width: 3.w(context)),
-                  Text(city ?? "Not available check website"),
+                  Text(city ?? l10n.notAvailableCheckWebsite),
                 ],
               ),
               Row(
                 children: [
-                  // Icon(CupertinoIcons.time,color: Colors.red,),
                   Text(
                     "📅 ",
                     style: theme.bodySmall!.copyWith(
@@ -370,19 +309,18 @@ class ProgramDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Deadline:",
+                    l10n.deadline,
                     style: theme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 15.sp(context),
                     ),
                   ),
                   SizedBox(width: 6.w(context)),
-                  Text(deadline ?? "Not available check website"),
+                  Text(deadline ?? l10n.notAvailableCheckWebsite),
                 ],
               ),
               Row(
                 children: [
-                  // Icon(CupertinoIcons.wind,color: Colors.green,),
                   Text(
                     "🎓 ",
                     style: theme.bodySmall!.copyWith(
@@ -391,22 +329,21 @@ class ProgramDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Intake:",
+                    l10n.intake,
                     style: theme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 15.sp(context),
                     ),
                   ),
                   SizedBox(width: 6.w(context)),
-                  Text(intake ?? "Not available check website"),
+                  Text(intake ?? l10n.notAvailableCheckWebsite),
                 ],
               ),
               if (isPublicUniversity != null)
                 Row(
                   children: [
-                    // Icon(isPublicUniversity ?Icons.public:Icons.public_off,color: Colors.blue,),
                     Text(
-                      "University:",
+                      l10n.university,
                       style: theme.bodySmall!.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 15.sp(context),
@@ -415,8 +352,8 @@ class ProgramDetailsScreen extends StatelessWidget {
                     SizedBox(width: 6.w(context)),
                     Text(
                       isPublicUniversity
-                          ? "Public University"
-                          : "Private University",
+                          ? l10n.publicUniversity
+                          : l10n.privateUniversity,
                     ),
                   ],
                 ),
@@ -450,10 +387,10 @@ class ProgramDetailsScreen extends StatelessWidget {
       } else if (toeflRequirement != null) {
         languageSubtitle = "TOEFL: $toeflRequirement";
       } else {
-        languageSubtitle = "English requirements not available";
+        languageSubtitle = l10n.englishRequirementsNotAvailable;
       }
     } else {
-      languageSubtitle = germanLevel ?? "German level not available";
+      languageSubtitle = germanLevel ?? l10n.germanLevelNotAvailable;
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -462,7 +399,7 @@ class ProgramDetailsScreen extends StatelessWidget {
         Column(
           children: [
             FeatureTile(
-              title: "Language Level",
+              title: l10n.languageLevel,
               subTitle: languageSubtitle,
               iconData: Icons.translate,
               iconColor: Colors.blueAccent,
@@ -472,8 +409,8 @@ class ProgramDetailsScreen extends StatelessWidget {
                 ? FeatureTile(
                     iconColor: Colors.green,
                     iconData: Icons.account_balance_wallet_outlined,
-                    title: "Requires block account",
-                    subTitle: requiresBlockedAccount == true ? "Yes" : "No",
+                    title: l10n.requiresBlockAccount,
+                    subTitle: requiresBlockedAccount == true ? l10n.yes : l10n.no,
                   )
                 : SizedBox.shrink(),
             SizedBox(height: 4.h(context)),
@@ -481,8 +418,8 @@ class ProgramDetailsScreen extends StatelessWidget {
                 ? FeatureTile(
                     iconColor: Colors.red,
                     iconData: Icons.policy_outlined,
-                    title: "Requires APS certificate",
-                    subTitle: "${requiresAPS ?? "Not available"}",
+                    title: l10n.requiresApsCertificate,
+                    subTitle: "${requiresAPS ?? l10n.notAvailableShort}",
                   )
                 : SizedBox.shrink(),
             SizedBox(height: 4.h(context)),
@@ -490,8 +427,8 @@ class ProgramDetailsScreen extends StatelessWidget {
               FeatureTile(
                 iconColor: Colors.redAccent,
                 iconData: Icons.policy_outlined,
-                title: "MOI policy",
-                subTitle: moiPolicy ?? "Not available",
+                title: l10n.moiPolicy,
+                subTitle: moiPolicy ?? l10n.notAvailableShort,
               ),
           ],
         ),

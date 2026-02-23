@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metadata_fetch/metadata_fetch.dart';
+import '../../../../l10n/app_localizations.dart';
 import 'package:study_path/core/utils/screen_util.dart';
 
 class LinkPreviewer extends StatefulWidget {
@@ -66,27 +67,25 @@ class _LinkPreviewerState extends State<LinkPreviewer> {
             fit: BoxFit.cover,
             // لو الصورة موجودة بس اللينك بتاعها بايظ (Broken Link)
             errorBuilder: (context, error, stackTrace) {
-              return _buildNoImageFallback();
+              return _buildNoImageFallback(context);
             },
           )
-              : _buildNoImageFallback(), // الحالة اللي طلبتها (لو مفيش صورة)
+              : _buildNoImageFallback(context),
         );
       },
     );
   }
 
-  // دي الويدجت اللي بتظهر لما ميكونش فيه صورة
-  Widget _buildNoImageFallback() {
+  Widget _buildNoImageFallback(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(Icons.image_not_supported, size: 40, color: Colors.grey),
-
-        // Image.asset("assets/icons/icon.png",height: 120.h(context),width: 120.w(context),),
-        SizedBox(height: 8,),
+        SizedBox(height: 8),
         Text(
-          "No image to preview",
-          style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 14),
+          l10n.noImageToPreview,
+          style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 14),
         ),
       ],
     );

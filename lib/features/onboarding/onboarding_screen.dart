@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:study_path/core/utils/screen_util.dart';
-import 'package:study_path/features/home/presentation/screens/home_screen.dart';
 import '../../l10n/app_localizations.dart';
 import '../../core/cache/cache_helper.dart';
 
@@ -20,11 +19,10 @@ class OnboardingScreen extends StatelessWidget {
         ),),
         centerBackground: true,
         finishButtonText: l10n.letsStart,
-        onFinish: () {
-          CacheHelper.set(key: CacheKeys.isOnBoardingSeen, value: true).then((value) {
-            Navigator.pushReplacementNamed(context, '/signIn');
-          });
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+        onFinish: () async {
+          await CacheHelper.set(key: CacheKeys.isOnBoardingSeen, value: true);
+          if (!context.mounted) return;
+          Navigator.pushReplacementNamed(context, '/signIn');
         },
         finishButtonStyle: const FinishButtonStyle(
           backgroundColor: Colors.black,

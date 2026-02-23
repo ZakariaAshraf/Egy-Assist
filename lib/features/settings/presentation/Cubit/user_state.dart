@@ -13,6 +13,8 @@ UserLoaded(this.user);
 }
 class UserSuccess extends UserState {}
 
+/// Emitted after account was deleted; UI should sign out and go to SignIn.
+final class UserAccountDeleted extends UserState {}
 
 class UserError extends UserState {
 final String message;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_path/core/cache/cache_helper.dart';
+import 'package:study_path/core/widgets/guest_restricted_overlay.dart';
 import 'package:study_path/core/widgets/university_card.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../core/widgets/default_message_card.dart';
@@ -15,9 +17,13 @@ class FavouriteScreen extends StatefulWidget {
 class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final isGuest = CacheHelper.getBool(key: CacheKeys.isGuestMode) == true;
+    if (isGuest) {
+      return GuestRestrictedScreen(title: l10n.bookmarks);
+    }
     return Scaffold(
-      appBar: AppBar(title: Text(l10n!.bookmarks), centerTitle: true),
+      appBar: AppBar(title: Text(l10n.bookmarks), centerTitle: true),
       body: BlocBuilder<FavouriteCubit, FavouriteState>(
         builder: (context, state) {
           // if (state is FavouriteInitial) {
@@ -34,7 +40,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 return DefaultMessageCard(
                   sign: '📪',
                   title: l10n.noFavorites,
-                  subTitle: l10n.favorite,
+                  // subTitle: l10n.favorite,
                 );
               }else {
                 return GridView.builder(

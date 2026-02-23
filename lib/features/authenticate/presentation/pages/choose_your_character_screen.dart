@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_path/core/cache/cache_helper.dart';
 import 'package:study_path/core/utils/screen_util.dart';
 import 'package:study_path/core/widgets/character_item.dart';
 import 'package:study_path/core/widgets/custom_button.dart';
@@ -56,10 +57,11 @@ class _ChooseYourCharacterScreenState extends State<ChooseYourCharacterScreen> {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
+            CacheHelper.set(key: CacheKeys.isGuestMode, value: false);
             Navigator.pushNamedAndRemoveUntil(
               context,
               "/main_screen",
-                  (route) => false,
+              (route) => false,
             );
           } else if (state is AuthFailure) {
             ScaffoldMessenger.of(
@@ -78,7 +80,6 @@ class _ChooseYourCharacterScreenState extends State<ChooseYourCharacterScreen> {
                     "Choose Your Character",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.black,
                       fontSize: 28.0.sp(context),
                       fontWeight: FontWeight.w600,
                     ),
@@ -88,8 +89,7 @@ class _ChooseYourCharacterScreenState extends State<ChooseYourCharacterScreen> {
                     '''Select the profile that best describes you to personalize your journey to Europe.''',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.black26,
-                      fontSize: 18.0.sp(context),
+                      fontSize: 16.0.sp(context),
                       fontWeight: FontWeight.w600,
                     ),
                   ),

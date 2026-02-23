@@ -167,7 +167,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get findYourDreamMasters => 'Find your dream\nMaster\'s in Europe';
 
   @override
-  String get searchOverDegrees => 'Search over 5,000 degrees';
+  String get searchOverDegrees => 'Search over 100 degrees';
 
   @override
   String get startNewSearch => 'Start New Search';
@@ -189,6 +189,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get filters => 'Filters';
+
+  @override
+  String get programs => 'Programs';
 
   @override
   String get whereDoYouWantToStudy => 'Where do you want to study ?';
@@ -266,6 +269,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewPortal => 'View Portal';
 
   @override
+  String get startYourSearchNow => 'Start Your Search Now';
+
+  @override
+  String get searchWithUniversityNameOrProgramName => 'Search with university name or program name';
+
+  @override
   String get bookmarks => 'Bookmarks';
 
   @override
@@ -306,4 +315,282 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get moiAccepted => 'MOI accepted';
+
+  @override
+  String get aboutUniversity => 'About University';
+
+  @override
+  String get city => 'City:';
+
+  @override
+  String get notAvailableCheckWebsite => 'Not available check website';
+
+  @override
+  String get deadline => 'Deadline:';
+
+  @override
+  String get intake => 'Intake:';
+
+  @override
+  String get university => 'University:';
+
+  @override
+  String get publicUniversity => 'Public University';
+
+  @override
+  String get privateUniversity => 'Private University';
+
+  @override
+  String get languageLevel => 'Language Level';
+
+  @override
+  String get requiresBlockAccount => 'Requires block account';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get requiresApsCertificate => 'Requires APS certificate';
+
+  @override
+  String get moiPolicy => 'MOI policy';
+
+  @override
+  String get mostPopular => 'Most Popular';
+
+  @override
+  String get tuitionFees => 'TUITION FEES';
+
+  @override
+  String get almostFree => 'Almost free';
+
+  @override
+  String get studentWorkHours => 'STUDENT WORK HOURS';
+
+  @override
+  String get studentWorkHoursValue => '20 H/W';
+
+  @override
+  String get countryOverview => 'Country Overview';
+
+  @override
+  String get basicRequirements => 'Basic requirements';
+
+  @override
+  String get stepsToStudy => 'Steps to Study';
+
+  @override
+  String stepN(Object n) {
+    return 'Step $n';
+  }
+
+  @override
+  String get linksWillHelpYou => 'Links will help you';
+
+  @override
+  String get embassy => 'Embassy';
+
+  @override
+  String get toMakeVisaAppointment => 'To make a visa appointment';
+
+  @override
+  String get vfs => 'VFS';
+
+  @override
+  String get toMakeLegalizationAppointment => 'To make a legalization appointment';
+
+  @override
+  String get embassyLocation => 'Embassy Location';
+
+  @override
+  String get toAttendYourAppointment => 'To attend your appointment';
+
+  @override
+  String get readyToStartJourney => 'Ready to start your journey ?';
+
+  @override
+  String get findOpenProgramsAndApply => 'find open programs and apply now';
+
+  @override
+  String get browsePrograms => 'Browse Programs';
+
+  @override
+  String get exploreDestinations => 'Explore Destinations';
+
+  @override
+  String get verifyYourNumber => 'Verify your number';
+
+  @override
+  String get getOtp => 'Get Otp';
+
+  @override
+  String get enterNumber => 'Enter number';
+
+  @override
+  String get verify => 'Verify';
+
+  @override
+  String get success => 'Success';
+
+  @override
+  String get recommendFeature => 'Recommend feature';
+
+  @override
+  String get recommendFeatureMessage => 'I want to recommend you a feature';
+
+  @override
+  String get noImageToPreview => 'No image to preview';
+
+  @override
+  String get notAvailableShort => 'Not available';
+
+  @override
+  String get germany => 'Germany';
+
+  @override
+  String get austria => 'Austria';
+
+  @override
+  String get otherEuropeanCountries => 'Other European Countries';
+
+  @override
+  String get apsCertificateForEgyptians => 'might require APS certificate for Egyptians';
+
+  @override
+  String get computerScience => 'Computer Science';
+
+  @override
+  String get business => 'Business';
+
+  @override
+  String get englishRequirementsNotAvailable => 'English requirements not available';
+
+  @override
+  String get germanLevelNotAvailable => 'German level not available';
+
+  @override
+  String get semesters => 'semesters';
+
+  @override
+  String get cairo => 'Cairo';
+
+  @override
+  String get germanyDescription => 'Germany offers world-class education with little or no tuition fees at public universities. Known for its strong engineering, research excellence, and robust economy, it is one of the top destinations for international students. Graduates also benefit from excellent post-study work opportunities.';
+
+  @override
+  String get germanyReq1 => 'APS Certificate (mandatory for Egyptian students)';
+
+  @override
+  String get germanyReq2 => 'Bachelor program: High school certificate + transcripts (translated & legalized)';
+
+  @override
+  String get germanyReq3 => 'Master program: Bachelor certificate + transcripts (translated & legalized)';
+
+  @override
+  String get germanyReq4 => 'Language certificate (IELTS / TOEFL / TestDaF) depending on program';
+
+  @override
+  String get germanyReq5 => 'Blocked account with approx. 11,208 EUR per year';
+
+  @override
+  String get germanyStep1Title => 'Choose your program and university';
+
+  @override
+  String get germanyStep1Desc => 'Search for suitable programs and check admission requirements. Apply either through Uni-Assist or directly via the university portal.';
+
+  @override
+  String get germanyStep2Title => 'Apply and receive admission';
+
+  @override
+  String get germanyStep2Desc => 'Prepare translated and legalized documents. Submit before deadlines and wait for acceptance letter.';
+
+  @override
+  String get germanyStep3Title => 'Open blocked account & apply for visa';
+
+  @override
+  String get germanyStep3Desc => 'After receiving admission and APS certificate, open a blocked account and book an appointment at the German Embassy in Cairo.';
+
+  @override
+  String get austriaDescription => 'Austria offers high-quality education in the heart of Europe with affordable tuition fees at public universities. Many programs are taught in German, and students benefit from a safe environment, strong academic reputation, and central European lifestyle.';
+
+  @override
+  String get austriaReq1 => 'Bachelor program: High school certificate + transcripts (translated & legalized)';
+
+  @override
+  String get austriaReq2 => 'Master program: Bachelor certificate + transcripts (translated & legalized)';
+
+  @override
+  String get austriaReq3 => 'German language certificate (usually B2 level) or English certificate depending on program';
+
+  @override
+  String get austriaReq4 => 'Proof of sufficient financial means (approx. 8,000–12,000 EUR per year depending on age)';
+
+  @override
+  String get austriaReq5 => 'Residence Permit – Student application';
+
+  @override
+  String get austriaStep1Title => 'Choose your program and university';
+
+  @override
+  String get austriaStep1Desc => 'Search for suitable programs and check specific language and admission requirements on the university website.';
+
+  @override
+  String get austriaStep2Title => 'Submit application';
+
+  @override
+  String get austriaStep2Desc => 'Prepare translated and legalized documents and apply directly through the university portal.';
+
+  @override
+  String get austriaStep3Title => 'Apply for Residence Permit – Student';
+
+  @override
+  String get austriaStep3Desc => 'After receiving admission, book an appointment at the Austrian Embassy in Cairo and apply for the residence permit.';
+
+  @override
+  String get aboutUs => 'About Us';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get termsAndConditions => 'Terms and Conditions';
+
+  @override
+  String get aboutUsContent => 'Egy Assist helps you discover Master\'s programs across Europe. We provide filters by country, field of study, language, and requirements so you can find the right program and apply with confidence.\n\nOur goal is to make European higher education accessible and clear for students worldwide.';
+
+  @override
+  String get privacyPolicyContent => 'We respect your privacy. This app stores your account data and preferences to provide a personalized experience. We do not sell your data to third parties.\n\nData we may collect or store: account information (name, email, phone), saved programs, and app preferences. You can delete your account at any time from Settings.\n\nFor questions about data use, contact us through the app.';
+
+  @override
+  String get termsAndConditionsContent => 'By using Egy Assist you agree to use the app for personal, non-commercial purposes. Program information is provided for guidance; always verify details on official university websites before applying.\n\nWe are not responsible for admission decisions, visa outcomes, or changes to program requirements. You are responsible for the accuracy of your applications and compliance with local laws.';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get deleteAccountWarningTitle => 'Delete account?';
+
+  @override
+  String get deleteAccountWarningMessage => 'This will permanently delete your account and all your data (profile, saved programs). You will not be able to recover it. This action cannot be undone.';
+
+  @override
+  String get deleteAccountConfirm => 'Delete my account';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get deleteAccountSuccess => 'Account deleted successfully';
+
+  @override
+  String get deleteAccountRequireRecentLogin => 'For security, please sign out and sign in again, then try deleting your account.';
+
+  @override
+  String get guestCreateAccountToAccess => 'You must create an account to access this section.';
 }

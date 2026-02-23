@@ -1,16 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_path/core/cache/cache_helper.dart';
 import 'package:study_path/core/utils/screen_util.dart';
 import 'package:study_path/features/authenticate/presentation/pages/sign_up.dart';
 import 'package:study_path/features/settings/presentation/screens/change_password_screen.dart';
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../favorite/cubit/favourite_cubit.dart';
-import '../../../home/presentation/screens/home_screen.dart';
 import '../../../settings/presentation/Cubit/user_cubit.dart';
 import '../manager/auth_cubit.dart';
 
@@ -38,23 +36,26 @@ class _SignInState extends State<SignIn> {
     var theme = Theme.of(context).textTheme;
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
-        listener: (context, state)async {
+        listenWhen: (previous, current) =>
+            current is AuthSuccess || current is AuthFailure,
+        listener: (context, state) {
           if (state is AuthSuccess) {
+            CacheHelper.set(key: CacheKeys.isGuestMode, value: false);
             final userId = state.user.id;
             context.read<UserCubit>().listenToFirebaseStream(userId);
-            // Start listening to favourites for the newly signed‑in user
             context.read<FavouriteCubit>().listenToFavorites();
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              "/main_screen",
-              (route) => false,
-            );
+            // Defer to next frame so navigation runs after build; use root navigator
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (!context.mounted) return;
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamedAndRemoveUntil('/main_screen', (route) => false);
+            });
           } else if (state is AuthFailure) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(l10n!.loginFailed),
+                content: Text(l10n.loginFailed),
                 backgroundColor: Colors.red,
               ),
             );
@@ -159,17 +160,26 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
 
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 30),
                       Center(
                         child: CustomButton(
+                          color: Colors.transparent,
+                          textStyle: theme.titleMedium!.copyWith(color: Colors.blue),
                           width: 300.w(context),
                           isInvert: true,
                           title: l10n.continueAsGuest,
-                          onTap: () {},
+                          onTap: () async {
+                            await CacheHelper.set(key: CacheKeys.isGuestMode, value: true);
+                            if (!context.mounted) return;
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              '/main_screen',
+                              (route) => false,
+                            );
+                          },
                         ),
                       ),
                       const SizedBox(height: 15),
-
                       Divider(),
                       Row(
                         children: [

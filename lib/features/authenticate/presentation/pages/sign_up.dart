@@ -128,12 +128,12 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                Center(
-                  child: Text(
-                    l10n.orContinueWith,
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
+                // Center(
+                //   child: Text(
+                //     l10n.orContinueWith,
+                //     style: TextStyle(color: Colors.grey),
+                //   ),
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

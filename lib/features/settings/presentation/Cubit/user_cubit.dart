@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -155,6 +154,54 @@ class UserCubit extends Cubit<UserState> {
       emit(UserSuccess());
     } catch (e) {
       emit(UserError(e.toString()));
+    }
+  }
+  /// Deletes the account safely: Firestore user + bookmarks, local cache, then Firebase Auth user.
+  /// Emits [UserAccountDeleted] on success; [UserError] on failure.
+  /// Caller should then sign out and navigate to SignIn when [UserAccountDeleted] is received.
+  Future<void> deleteAccount() async {
+    final User? currentUser = _auth.currentUser;
+    if (currentUser == null) {
+      emit(UserError("User not logged in."));
+      return;
+    }
+
+    final String userId = currentUser.uid;
+
+    try {
+      // 1. Delete bookmarks subcollection (Firestore does not delete subcollections when doc is deleted)
+      final bookmarksSnapshot = await _firestore
+          .collection("users")
+          .doc(userId)
+          .collection("bookmarks")
+          .get();
+
+      for (final doc in bookmarksSnapshot.docs) {
+        await doc.reference.delete();
+      }
+
+      // 2. Delete user document
+      await _firestore.collection("users").doc(userId).delete();
+
+      // 3. Clear local cache
+      await CacheHelper.remove(key: CacheKeys.uId);
+      await CacheHelper.remove(key: CacheKeys.userName);
+      await CacheHelper.remove(key: CacheKeys.userPhone);
+      await CacheHelper.remove(key: CacheKeys.userCharacter);
+
+      // 4. Delete Firebase Auth account (this signs out implicitly)
+      await currentUser.delete();
+
+      emit(UserAccountDeleted());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        emit(UserError(
+            "For security, please sign out and sign in again, then try deleting your account."));
+      } else {
+        emit(UserError(e.message ?? "Error deleting account: ${e.code}"));
+      }
+    } catch (e) {
+      emit(UserError("Error deleting account: $e"));
     }
   }
 }

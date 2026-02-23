@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:study_path/core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/custom_toast_widget.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../home/presentation/screens/home_screen.dart';
 import 'otp_authentication.dart';
 
@@ -15,7 +16,7 @@ class PhoneNumberValidation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final TextEditingController phoneController = TextEditingController(
       text: number,
     );
@@ -23,30 +24,30 @@ class PhoneNumberValidation extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Verify your number"),
+        title: Text(l10n.verifyYourNumber),
         actions: [TextButton(onPressed: () {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => HomeScreen(),
               ));
-        }, child: Text("Skip"))],
+        }, child: Text(l10n.skip))],
       ),
       body: Column(
         children: [
           CustomTextField(
             controller: phoneController,
-            hintText: "l10n.phoneNumber",
+            hintText: l10n.phoneNumber,
           ),
           SizedBox(height: 30),
           CustomButton(
-            title: "Get Otp",
+            title: l10n.getOtp,
             onTap: () async {
               String number = phoneController.text.trim();
               if (number.isEmpty) {
                 CustomToastWidget.show(
                   context: context,
-                  title: "Enter number",
+                  title: l10n.enterNumber,
                   iconPath: "assets/icons/icon.png",
                 );
               } else {

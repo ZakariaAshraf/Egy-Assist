@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:study_path/core/utils/screen_util.dart';
 import 'package:study_path/core/widgets/custom_button.dart';
-import 'package:study_path/features/home/presentation/screens/search_results_screen.dart';
+import 'package:study_path/features/filter/presentation/screens/filter_results_screen.dart';
+import '../../../../core/services/ad_manger.dart';
 import '../../../../l10n/app_localizations.dart';
 
 import '../../../home/presentation/cubit/programs_cubit.dart';
@@ -26,11 +28,58 @@ class _FilterScreenState extends State<FilterScreen> {
   String? _selectedLanguage;
   String? _selectedDegree;
   String? _selectedField;
+  InterstitialAd? interstitialAd;
 
+  bool isLoaded = false;
+
+  load() {
+    InterstitialAd.load(
+      adUnitId: AdManger.rewardedSchedule,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdShowedFullScreenContent: (ad) {
+              // Called when the ad showed the full screen content.
+              debugPrint('Ad showed full screen content.');
+            },
+
+            onAdFailedToShowFullScreenContent: (ad, err) {
+              // Called when the ad failed to show full screen content.
+              debugPrint(
+                'Ad failed to show full screen content with error: $err',
+              );
+              // Dispose the ad here to free resources.
+              ad.dispose();
+            },
+            onAdDismissedFullScreenContent: (ad) {
+              // Called when the ad dismissed full screen content.
+              debugPrint('Ad was dismissed.');
+              // Dispose the ad here to free resources.
+              ad.dispose();
+            },
+            onAdImpression: (ad) {
+              // Called when an impression occurs on the ad.
+              debugPrint('Ad recorded an impression.');
+            },
+            onAdClicked: (ad) {
+              // Called when a click is recorded for an ad.
+              debugPrint('Ad was clicked.');
+            },
+          );
+          debugPrint('Ad was loaded.');
+          interstitialAd = ad;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          debugPrint('Ad failed to load with error: $error');
+        },
+      ),
+    );
+  }
   @override
   void initState() {
     // _selected = List.generate(languages.length, (_) => false);
-
+    load();
     super.initState();
   }
 
@@ -82,11 +131,11 @@ class _FilterScreenState extends State<FilterScreen> {
                   ],
                 ),
                 items: [
-                  DropdownMenuItem(value: "Germany", child: Text("Germany")),
-                  DropdownMenuItem(value: "Austria", child: Text("Austria")),
+                  DropdownMenuItem(value: "Germany", child: Text(l10n.germany)),
+                  DropdownMenuItem(value: "Austria", child: Text(l10n.austria)),
                   DropdownMenuItem(
                     value: "Other European Countries",
-                    child: Text("Other European Countries"),
+                    child: Text(l10n.otherEuropeanCountries),
                   ),
                 ],
                 onChanged: (String? value) {
@@ -97,7 +146,7 @@ class _FilterScreenState extends State<FilterScreen> {
               ?_selectedDestination == "Germany"
                   ? Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("⚠️  might require APS certificate for Egyptians",style: theme.titleMedium!.copyWith(color: Colors.grey),),
+                    child: Text("⚠️ ${l10n.apsCertificateForEgyptians}", style: theme.titleMedium!.copyWith(color: Colors.grey),),
                   )
                   : null,
               SizedBox(height: 20.h(context)),
@@ -117,10 +166,10 @@ class _FilterScreenState extends State<FilterScreen> {
                 ),
                 items: [
                   DropdownMenuItem(
-                    value: "Computer Science",
-                    child: Text("Computer Science"),
+                    value: "computer_science",
+                    child: Text(l10n.computerScience),
                   ),
-                  DropdownMenuItem(value: "Business", child: Text("Business")),
+                  DropdownMenuItem(value: "business", child: Text(l10n.business)),
                 ],
                 onChanged: (String? value) {
                   _selectedField = value;
@@ -322,10 +371,29 @@ class _FilterScreenState extends State<FilterScreen> {
                     studyField: _selectedField ?? "",
                     degreeType: _selectedDegree ?? "",
                   );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SearchResultsScreen()),
-                  );
+                  void navigateToResults() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SearchResultsScreen()),
+                    );
+                  }
+
+                  if (interstitialAd != null) {
+                    interstitialAd!.fullScreenContentCallback =
+                        FullScreenContentCallback(
+                          onAdDismissedFullScreenContent: (ad) {
+                            navigateToResults(); // انتقل بمجرد إغلاق الإعلان
+                            ad.dispose();
+                          },
+                          onAdFailedToShowFullScreenContent: (ad, err) {
+                            navigateToResults(); // انتقل لو فشل العرض
+                            ad.dispose();
+                          },
+                        );
+                    interstitialAd!.show();
+                  } else {
+                    navigateToResults();
+                  }
                 },
                 color: Colors.black,
               ),

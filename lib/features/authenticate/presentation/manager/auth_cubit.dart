@@ -44,6 +44,19 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  Future<void> deleteUserData({
+    required String name,
+    required String phone,
+    String? character,
+  }) async {
+    try {
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+      await FirebaseFirestore.instance.collection("users").doc(userId).delete();
+    } catch (e) {
+      emit(AuthFailure("Error saving user data: $e"));
+    }
+  }
+
   Future<void> register(
       {required String email,
       required String password,

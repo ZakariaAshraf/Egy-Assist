@@ -4,7 +4,7 @@ import 'package:study_path/core/widgets/university_item.dart';
 import '../../../../l10n/app_localizations.dart';
 
 import '../../../../core/widgets/default_message_card.dart';
-import '../cubit/programs_cubit.dart';
+import '../../../home/presentation/cubit/programs_cubit.dart';
 
 class SearchResultsScreen extends StatelessWidget {
   const SearchResultsScreen({super.key});
@@ -33,13 +33,11 @@ class SearchResultsScreen extends StatelessWidget {
               return DefaultMessageCard(
                 sign: '0_0',
                 title: l10n.listIsEmpty,
-                subTitle: "",
               );
             }else if (state is ProgramsError) {
               return DefaultMessageCard(
                 sign: ':(',
                 title: l10n.listIsEmpty,
-                subTitle: "",
               );
             }
             return Container();

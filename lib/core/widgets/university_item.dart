@@ -51,7 +51,7 @@ class UniversityItem extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "MOI accepted",
+                                l10n.moiAccepted,
                                 style: theme.bodyMedium!.copyWith(
                                   color: Colors.green,
                                 ),
@@ -81,8 +81,8 @@ class UniversityItem extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(isFavorite
-                                      ? "removed from bookmarks"
-                                      : "added to saved programs"),
+                                      ? l10n.removedFromBookmarks
+                                      : l10n.addedToSavedPrograms),
                                   duration: const Duration(seconds: 1),
                                 ),
                               );

@@ -1,12 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:study_path/core/utils/screen_util.dart';
+import 'package:study_path/core/cache/cache_helper.dart';
 import 'package:study_path/core/widgets/custom_toast_widget.dart';
-import 'package:study_path/features/notification/presentation/screens/notification_screen.dart';
+import 'package:study_path/core/widgets/guest_restricted_overlay.dart';
 import '../../../../l10n/app_localizations.dart';
 
-import '../../../../core/data/app_user_model.dart';
 import '../../../../core/generated/assets/assets_helper.dart';
 import '../../../settings/presentation/Cubit/user_cubit.dart';
 
@@ -25,6 +26,30 @@ class _UserInfoSectionState extends State<UserInfoSection> {
 
   @override
   Widget build(BuildContext context) {
+    final isGuest = CacheHelper.getBool(key: CacheKeys.isGuestMode) == true;
+    if (isGuest) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface.withOpacity(0.7),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.3)),
+              ),
+              child: GuestRestrictedContent(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                messageStyle: Theme.of(context).textTheme.titleSmall,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
     var theme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<UserCubit, UserState>(

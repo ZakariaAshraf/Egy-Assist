@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_path/core/utils/screen_util.dart';
+import 'package:study_path/features/authenticate/presentation/manager/auth_cubit.dart';
+import 'package:study_path/features/authenticate/presentation/pages/sign_in.dart';
 import '../../../../core/generated/assets/assets_helper.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/character_item.dart';
@@ -59,6 +61,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.dispose();
   }
 
+  void _showDeleteAccountDialog(BuildContext context, AppLocalizations l10n) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.deleteAccountWarningTitle,style: TextStyle(color: Colors.red),),
+        content: SingleChildScrollView(
+          child: Text(l10n.deleteAccountWarningMessage),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: Text(l10n.cancel),
+          ),
+          FilledButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+              context.read<UserCubit>().deleteAccount();
+            },
+            style: FilledButton.styleFrom(
+              backgroundColor: Colors.red,
+            ),
+            child: Text(l10n.deleteAccountConfirm),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -68,6 +99,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         listener: (context, state) {
           if (state is UserSuccess) {
             Navigator.pop(context);
+          } else if (state is UserAccountDeleted) {
+            context.read<AuthCubit>().signOut();
+            if (context.mounted) {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const SignIn()),
+                (route) => false,
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(l10n.deleteAccountSuccess)),
+              );
+            }
           } else if (state is UserError) {
             ScaffoldMessenger.of(
               context,
@@ -224,7 +266,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 /// --- Save Button ---
                 CustomButton(
                   color: AppColors.blackSecondary,
-                  title:l10n.saveChanges,
+                  title: l10n.saveChanges,
                   onTap: () {
                     String charToSend;
                     if (selectedIndex != -1) {
@@ -238,6 +280,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       charPath: charToSend,
                     );
                   },
+                ),
+                const SizedBox(height: 24),
+
+                CustomButton(
+                  color: Colors.redAccent,
+                  title: l10n.deleteAccount,
+                  onTap: () => _showDeleteAccountDialog(context, l10n),
                 ),
               ],
             ),

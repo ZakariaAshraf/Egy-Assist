@@ -31,16 +31,6 @@ class SearchSection extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Positioned.directional(
-            //   textDirection: direction,
-            //   end: 10.w(context),
-            //   top: 4,
-            //   child: Image(
-            //     image: const AssetImage(""),
-            //     width: 170.w(context),
-            //     height: 170.h(context),
-            //   ),
-            // ),
             Positioned.directional(
               textDirection: direction,
               start: 10.w(context),
@@ -72,17 +62,16 @@ class SearchSection extends StatelessWidget {
               ),
             ),
             Positioned.directional(
-              start: 10.w(context),
+              start: 20.w(context),
               textDirection: direction,
               top: 180.h(context),
               child: GestureDetector(
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen(),));
                   Navigator.push(context, MaterialPageRoute(builder: (context) => FilterScreen(),));
                 },
                 child: Container(
                   height: 60.h(context),
-                  width: 345.h(context),
+                  width: 320.w(context),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.white,
@@ -103,7 +92,7 @@ class SearchSection extends StatelessWidget {
                         Container(
                           // height: 40,
                           // width: 64.w(context),
-                          padding: EdgeInsets.all(7),
+                          padding: EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             // shape: BoxShape.circle,

@@ -8,14 +8,17 @@ import 'package:study_path/core/utils/screen_util.dart';
 import 'package:study_path/core/widgets/custom_button.dart';
 import 'package:study_path/features/authenticate/presentation/manager/auth_cubit.dart';
 import 'package:study_path/features/authenticate/presentation/pages/sign_in.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/generated/assets/assets_helper.dart';
 import '../../../../core/locale/widgets/language_toggle_button.dart';
 import '../../../../core/themes/widgets/theme_toggle_button.dart';
+import '../../../../core/utils/extenstions.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../main.dart';
 import '../components/settings_button.dart';
 import 'change_password_screen.dart';
 import 'edit_profile_screen.dart';
+import 'package:study_path/features/help_support/help_support_screen.dart';
 
 class SettingScreen extends StatefulWidget {
   final String name;
@@ -172,15 +175,23 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: Column(
                     children: [
                       SettingsButton(
-                        // title: l10n.helpAndSupport,
-                        title:"Recommend feature",
-                        function: () {},
+                        title: l10n.recommendFeature,
+                        function: () async {
+                          await launchUrls("https://docs.google.com/forms/d/e/1FAIpQLSe2Vx2iqWW96Bio2y8f2Gm2fUm0-b-Jo7u3Be2mVggopnDvJg/viewform?usp=header");
+                        },
                         iconData: Icons.lightbulb_outlined,
                         iconColor: Colors.yellow,
                       ),
                       SettingsButton(
                         title: l10n.helpAndSupport,
-                        function: () {},
+                        function: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HelpSupportScreen(),
+                            ),
+                          );
+                        },
                         iconData: Icons.question_mark_rounded,
                         iconColor: Colors.green,
                       ),
