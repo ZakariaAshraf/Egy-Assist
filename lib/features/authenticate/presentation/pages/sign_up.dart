@@ -23,11 +23,39 @@ class _SignUpState extends State<SignUp> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController nationalityController = TextEditingController();
 
+  /// Email must contain @ and a domain with at least one dot (e.g. .com, .net, .co.uk)
+  static final _emailRegex = RegExp(
+    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+  );
+
+  bool get _isValidEmail => _emailRegex.hasMatch(emailController.text.trim());
+
+  bool get _hasPasswordLength =>
+      passwordController.text.length >= 8;
+  bool get _hasPasswordUppercase =>
+      passwordController.text.contains(RegExp(r'[A-Z]'));
+  bool get _hasPasswordLowercase =>
+      passwordController.text.contains(RegExp(r'[a-z]'));
+  bool get _hasPasswordDigit =>
+      passwordController.text.contains(RegExp(r'[0-9]'));
+
+  bool get _isPasswordValid =>
+      _hasPasswordLength &&
+      _hasPasswordUppercase &&
+      _hasPasswordLowercase &&
+      _hasPasswordDigit;
+
   bool areFieldsFilled() {
-    return nameController.text.isNotEmpty &&
-        emailController.text.isNotEmpty &&
+    return nameController.text.trim().isNotEmpty &&
+        emailController.text.trim().isNotEmpty &&
         passwordController.text.isNotEmpty &&
-        phoneController.text.isNotEmpty;
+        phoneController.text.trim().isNotEmpty;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    passwordController.addListener(() => setState(() {}));
   }
 
   @override
@@ -90,6 +118,38 @@ class _SignUpState extends State<SignUp> {
                   controller: passwordController,
                   hintText: l10n.password,
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12, top: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.passwordRequirements,
+                        style: theme.bodySmall!.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      _RequirementRow(
+                        met: _hasPasswordLength,
+                        label: l10n.passwordRequirementLength,
+                      ),
+                      _RequirementRow(
+                        met: _hasPasswordUppercase,
+                        label: l10n.passwordRequirementUppercase,
+                      ),
+                      _RequirementRow(
+                        met: _hasPasswordLowercase,
+                        label: l10n.passwordRequirementLowercase,
+                      ),
+                      _RequirementRow(
+                        met: _hasPasswordDigit,
+                        label: l10n.passwordRequirementDigit,
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 15),
                 CustomTextField(
                   controller: phoneController,
@@ -101,29 +161,53 @@ class _SignUpState extends State<SignUp> {
                   child: CustomButton(
                     title: l10n.register,
                     onTap: () {
-                      if (areFieldsFilled()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChooseYourCharacterScreen(
-                              email: emailController.text,
-                              password: passwordController.text,
-                              phoneNumber: phoneController.text,
-                              name: nameController.text,
-                            ),
-                          ),
-                        );
-                      } else {
+                      if (!areFieldsFilled()) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
                               l10n.pleaseFillAllFields,
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                             backgroundColor: Colors.red,
                           ),
                         );
+                        return;
                       }
+                      if (!_isValidEmail) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              l10n.invalidEmail,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                        return;
+                      }
+                      if (!_isPasswordValid) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              l10n.passwordTooWeak,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                        return;
+                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChooseYourCharacterScreen(
+                            email: emailController.text.trim(),
+                            password: passwordController.text,
+                            phoneNumber: phoneController.text.trim(),
+                            name: nameController.text.trim(),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -159,6 +243,42 @@ class _SignUpState extends State<SignUp> {
                   ],
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RequirementRow extends StatelessWidget {
+  const _RequirementRow({required this.met, required this.label});
+
+  final bool met;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Row(
+        children: [
+          Icon(
+            met ? Icons.check_circle : Icons.cancel,
+            size: 18,
+            color: met ? Colors.green : Colors.grey,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              label,
+              style: theme.bodySmall!.copyWith(
+                color: met
+                    ? Colors.green
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
+                fontSize: 12,
+              ),
             ),
           ),
         ],

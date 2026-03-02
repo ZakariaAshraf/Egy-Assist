@@ -134,6 +134,27 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pleaseFillAllFields => 'يرجى ملء جميع الحقول';
 
   @override
+  String get invalidEmail => 'يرجى إدخال بريد إلكتروني صحيح (مثال: name@gmail.com أو name@hotmail.com)';
+
+  @override
+  String get passwordRequirements => 'كلمة المرور يجب أن تحتوي على:';
+
+  @override
+  String get passwordRequirementLength => '8 أحرف على الأقل';
+
+  @override
+  String get passwordRequirementUppercase => 'حرف كبير واحد (A-Z)';
+
+  @override
+  String get passwordRequirementLowercase => 'حرف صغير واحد (a-z)';
+
+  @override
+  String get passwordRequirementDigit => 'رقم واحد (0-9)';
+
+  @override
+  String get passwordTooWeak => 'يرجى تقوية كلمة المرور (انظر المتطلبات أدناه)';
+
+  @override
   String get orContinueWith => 'أو المتابعة مع';
 
   @override

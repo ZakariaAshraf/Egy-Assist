@@ -341,6 +341,14 @@ abstract class AppLocalizations {
   /// **'Please fill all fields'**
   String get pleaseFillAllFields;
 
+  String get invalidEmail;
+  String get passwordRequirements;
+  String get passwordRequirementLength;
+  String get passwordRequirementUppercase;
+  String get passwordRequirementLowercase;
+  String get passwordRequirementDigit;
+  String get passwordTooWeak;
+
   /// No description provided for @orContinueWith.
   ///
   /// In en, this message translates to:

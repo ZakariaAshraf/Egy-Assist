@@ -134,6 +134,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseFillAllFields => 'Please fill all fields';
 
   @override
+  String get invalidEmail => 'Please enter a valid email (e.g. name@gmail.com or name@hotmail.com)';
+
+  @override
+  String get passwordRequirements => 'Password must have:';
+
+  @override
+  String get passwordRequirementLength => 'At least 8 characters';
+
+  @override
+  String get passwordRequirementUppercase => 'One uppercase letter (A-Z)';
+
+  @override
+  String get passwordRequirementLowercase => 'One lowercase letter (a-z)';
+
+  @override
+  String get passwordRequirementDigit => 'One number (0-9)';
+
+  @override
+  String get passwordTooWeak => 'Please make the password stronger (see requirements below)';
+
+  @override
   String get orContinueWith => 'or continue with';
 
   @override

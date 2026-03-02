@@ -47,5 +47,6 @@ app.*.map.json
 GUEST_MODE.md
 PRE_DEPLOYMENT_TEST_PLAN.md
 android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
 lib/firebase_options.dart
 lib/core/services/ad_manger.dart
