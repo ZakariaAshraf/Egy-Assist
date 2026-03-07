@@ -152,6 +152,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 const SizedBox(height: 15),
                 CustomTextField(
+                  keyboardType: TextInputType.numberWithOptions(),
                   controller: phoneController,
                   hintText: l10n.phoneNumber,
                 ),
