@@ -69,7 +69,7 @@
   "favorite": "مفضل",
   "reloadPage": "إعادة تحميل الصفحة",
   "findYourDreamMasters": "ابحث عن حلمك\nللدراسة في أوروبا",
-  "searchOverDegrees": "ابحث في أكثر من 100 درجة",
+  "searchOverDegrees": "ابحث في أكثر من 100 برنامج دراسي",
   "programs": "برامج",
   "startNewSearch": "اضغط لبدء البحث",
   "errorFetchingProperties": "خطأ في جلب الخصائص",
@@ -80,11 +80,11 @@
   "filters": "المرشحات",
   "whereDoYouWantToStudy": "أين تريد الدراسة؟",
   "selectDestination": "اختر الوجهة",
-  "academics": "الأكاديمية",
+  "academics": "الدراسة",
   "fieldOfStudy": "مجال الدراسة",
   "degreeType": "نوع الدرجة",
   "requirements": "المتطلبات",
-  "languageOfInstructions": "لغة التعليمات",
+  "languageOfInstructions": "لغة الدراسة",
   "languageDetails": "تفاصيل اللغة",
   "moi": "MOI",
   "previousStudyCertificate": "شهادة الدراسة السابقة",
@@ -124,6 +124,7 @@
   "aboutUniversity": "عن الجامعة",
   "city": "المدينة:",
   "notAvailableCheckWebsite": "غير متاح تحقق من الموقع",
+  "languageMoiCheckWebsite": "غالباً إنجليزي (MOI مقبول). تحقق من الموقع للتفاصيل.",
   "deadline": "الموعد النهائي:",
   "intake": "القبول:",
   "university": "الجامعة:",
@@ -212,5 +213,6 @@
   "cancel": "إلغاء",
   "deleteAccountSuccess": "تم حذف الحساب بنجاح",
   "deleteAccountRequireRecentLogin": "لأسباب أمنية، يرجى تسجيل الخروج ثم تسجيل الدخول مرة أخرى، ثم حاول حذف حسابك.",
-  "guestCreateAccountToAccess": "يجب إنشاء حساب للوصول إلى هذا القسم."
+  "guestCreateAccountToAccess": "يجب إنشاء حساب للوصول إلى هذا القسم.",
+  "shareProgramMessage": "وجدت برنامج {programName} في جامعة {universityName} باستخدام تطبيق Egy Assist.\\nرابط البرنامج: {programLink}\\nرابط التطبيق: {appLink}"
 }

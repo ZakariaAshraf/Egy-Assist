@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:study_path/core/utils/screen_util.dart';
 import 'package:study_path/core/widgets/feature_container.dart';
 import '../../../../core/services/ad_manger.dart';
@@ -52,12 +53,36 @@ class _ProgramDetailsScreenState extends State<ProgramDetailsScreen> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(widget.program.programName), centerTitle: true),
+      appBar: AppBar(
+        title: Text(widget.program.programName),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              final programLink =
+                  widget.program.applyLink.isNotEmpty ? widget.program.applyLink : (widget.program.websiteLink ?? '');
+              const appLink = '';
+              SharePlus.instance.share(
+                ShareParams(
+                  text: l10n.shareProgramMessage(
+                    programName: widget.program.programName,
+                    universityName: widget.program.universityName,
+                    programLink: programLink,
+                    appLink: appLink,
+                  ),
+                ),
+              );
+            },
+            icon: Icon(Icons.share),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -173,19 +198,21 @@ class _ProgramDetailsScreenState extends State<ProgramDetailsScreen> {
                     FeatureContainer(
                       icon: CupertinoIcons.money_euro,
                       featureTitle: l10n.tuition,
-                      data: "${widget.program.tuitionFees ?? l10n.notAvailable}",
+                      data:
+                          "${widget.program.tuitionFees ?? l10n.notAvailable}",
                       iconColor: Colors.green,
                     ),
                     FeatureContainer(
                       icon: CupertinoIcons.globe,
                       featureTitle: l10n.language,
-                      data: widget.program.language ?? l10n.countryLanguage,
+                      data: _languageDisplayText(),
                       iconColor: Colors.blueAccent,
                     ),
                     FeatureContainer(
                       icon: CupertinoIcons.time_solid,
                       featureTitle: l10n.duration,
-                      data: "${widget.program.duration ?? l10n.notAvailable} ${l10n.semesters}",
+                      data:
+                          "${widget.program.duration ?? l10n.notAvailable} ${l10n.semesters}",
                       iconColor: Colors.orange,
                     ),
                   ],
@@ -225,7 +252,8 @@ class _ProgramDetailsScreenState extends State<ProgramDetailsScreen> {
                       isInvert: false,
                       onTap: () async {
                         await launchUrls(
-                          widget.program.websiteLink ?? widget.program.applyLink,
+                          widget.program.websiteLink ??
+                              widget.program.applyLink,
                         );
                       },
                       color: Colors.white,
@@ -259,6 +287,17 @@ class _ProgramDetailsScreenState extends State<ProgramDetailsScreen> {
         ),
       ),
     );
+  }
+
+  String _languageDisplayText() {
+    final l10n = AppLocalizations.of(context)!;
+    final lang = widget.program.language?.trim() ?? '';
+    if (lang.isEmpty) {
+      return widget.program.moiAccepted
+          ? l10n.languageMoiCheckWebsite
+          : l10n.notAvailableCheckWebsite;
+    }
+    return widget.program.language!;
   }
 
   Widget _buildAboutSection({
@@ -410,7 +449,9 @@ class _ProgramDetailsScreenState extends State<ProgramDetailsScreen> {
                     iconColor: Colors.green,
                     iconData: Icons.account_balance_wallet_outlined,
                     title: l10n.requiresBlockAccount,
-                    subTitle: requiresBlockedAccount == true ? l10n.yes : l10n.no,
+                    subTitle: requiresBlockedAccount == true
+                        ? l10n.yes
+                        : l10n.no,
                   )
                 : SizedBox.shrink(),
             SizedBox(height: 4.h(context)),

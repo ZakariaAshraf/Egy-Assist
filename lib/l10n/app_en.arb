@@ -66,7 +66,7 @@
   "favorite": "favorite",
   "reloadPage": "Reload page",
   "findYourDreamMasters": "Find your dream\nMaster's in Europe",
-  "searchOverDegrees": "Search over 100 degrees",
+  "searchOverDegrees": "Search over 100 study programs",
   "startNewSearch": "Start New Search",
   "errorFetchingProperties": "Error fetching properties",
   "noPropertiesFound": "No properties found",
@@ -120,6 +120,7 @@
   "aboutUniversity": "About University",
   "city": "City:",
   "notAvailableCheckWebsite": "Not available check website",
+  "languageMoiCheckWebsite": "Likely English (MOI accepted). Check website for details.",
   "deadline": "Deadline:",
   "intake": "Intake:",
   "university": "University:",
@@ -208,5 +209,6 @@
   "cancel": "Cancel",
   "deleteAccountSuccess": "Account deleted successfully",
   "deleteAccountRequireRecentLogin": "For security, please sign out and sign in again, then try deleting your account.",
-  "guestCreateAccountToAccess": "You must create an account to access this section."
+  "guestCreateAccountToAccess": "You must create an account to access this section.",
+  "shareProgramMessage": "I found the program {programName} at {universityName} using Egy Assist.\\nProgram link: {programLink}\\nApp link: {appLink}"
 }

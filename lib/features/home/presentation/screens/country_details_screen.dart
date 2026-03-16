@@ -184,7 +184,7 @@ class CountryDetailsScreen extends StatelessWidget {
                           Text(l10n.basicRequirements, style: theme.titleLarge),
                           SizedBox(height: 10.h(context)),
                           Container(
-                            height: 500.h(context),
+                            // height: 500.h(context),
                             decoration: BoxDecoration(
                               border: BoxBorder.all(color: Colors.grey.shade300),
                               borderRadius: BorderRadius.circular(9),
@@ -225,7 +225,7 @@ class CountryDetailsScreen extends StatelessWidget {
                           Text(l10n.stepsToStudy, style: theme.titleLarge),
                           SizedBox(height: 10.h(context)),
                           Container(
-                            height: 550.h(context),
+                            // height: 550.h(context),
                             decoration: BoxDecoration(
                               border: BoxBorder.all(color: Colors.grey.shade300),
                               borderRadius: BorderRadius.circular(9),

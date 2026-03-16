@@ -191,7 +191,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get findYourDreamMasters => 'Find your dream\nMaster\'s in Europe';
 
   @override
-  String get searchOverDegrees => 'Search over 100 degrees';
+  String get searchOverDegrees => 'Search over 100 study programs';
 
   @override
   String get startNewSearch => 'Start New Search';
@@ -351,6 +351,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notAvailableCheckWebsite => 'Not available check website';
+
+  @override
+  String get languageMoiCheckWebsite => 'Likely English (MOI accepted). Check website for details.';
 
   @override
   String get deadline => 'Deadline:';
@@ -617,4 +620,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get guestCreateAccountToAccess => 'You must create an account to access this section.';
+
+  @override
+  String shareProgramMessage({
+    required String programName,
+    required String universityName,
+    required String programLink,
+    required String appLink,
+  }) =>
+      'I found the program $programName at $universityName using Egy Assist.\nProgram link: $programLink\nApp link: $appLink';
 }

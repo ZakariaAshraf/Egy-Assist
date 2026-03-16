@@ -191,7 +191,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get findYourDreamMasters => 'ابحث عن حلمك\nللدراسة في أوروبا';
 
   @override
-  String get searchOverDegrees => 'ابحث في أكثر من 100 درجة';
+  String get searchOverDegrees => 'ابحث في أكثر من 100 برنامج دراسي';
 
   @override
   String get startNewSearch => 'اضغط لبدء البحث';
@@ -224,7 +224,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectDestination => 'اختر الوجهة';
 
   @override
-  String get academics => 'الأكاديمية';
+  String get academics => 'الدراسة';
 
   @override
   String get fieldOfStudy => 'مجال الدراسة';
@@ -236,7 +236,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get requirements => 'المتطلبات';
 
   @override
-  String get languageOfInstructions => 'لغة التعليمات';
+  String get languageOfInstructions => 'لغة الدراسة';
 
   @override
   String get languageDetails => 'تفاصيل اللغة';
@@ -351,6 +351,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notAvailableCheckWebsite => 'غير متاح تحقق من الموقع';
+
+  @override
+  String get languageMoiCheckWebsite => 'غالباً إنجليزي (MOI مقبول). تحقق من الموقع للتفاصيل.';
 
   @override
   String get deadline => 'الموعد النهائي:';
@@ -617,4 +620,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get guestCreateAccountToAccess => 'يجب إنشاء حساب للوصول إلى هذا القسم.';
+
+  @override
+  String shareProgramMessage({
+    required String programName,
+    required String universityName,
+    required String programLink,
+    required String appLink,
+  }) =>
+      'وجدت برنامج $programName في جامعة $universityName باستخدام تطبيق Egy Assist.\nرابط البرنامج: $programLink\nرابط التطبيق: $appLink';
 }

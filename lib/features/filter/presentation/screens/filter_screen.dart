@@ -165,11 +165,14 @@ class _FilterScreenState extends State<FilterScreen> {
                   ],
                 ),
                 items: [
-                  DropdownMenuItem(
-                    value: "computer_science",
+              DropdownMenuItem(
+                    value: "Computer Science",
                     child: Text(l10n.computerScience),
                   ),
-                  DropdownMenuItem(value: "business", child: Text(l10n.business)),
+                  DropdownMenuItem(
+                    value: "Business",
+                    child: Text(l10n.business),
+                  ),
                 ],
                 onChanged: (String? value) {
                   _selectedField = value;
@@ -365,31 +368,39 @@ class _FilterScreenState extends State<FilterScreen> {
                     );
                     return;
                   }
-                  var data = await context.read<ProgramsCubit>().getPrograms(
-                    country: _selectedDestination ?? "",
-                    onlyMoi: _moiValue,
-                    studyField: _selectedField ?? "",
-                    degreeType: _selectedDegree ?? "",
-                  );
+                  await context.read<ProgramsCubit>().getPrograms(
+                        country: _selectedDestination ?? "",
+                        onlyMoi: _moiValue,
+                        studyField: _selectedField ?? "",
+                        degreeType: _selectedDegree ?? "",
+                        language: _selectedLanguage ?? "",
+                      );
+
                   void navigateToResults() {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SearchResultsScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => const SearchResultsScreen(),
+                      ),
                     );
                   }
 
                   if (interstitialAd != null) {
                     interstitialAd!.fullScreenContentCallback =
                         FullScreenContentCallback(
-                          onAdDismissedFullScreenContent: (ad) {
-                            navigateToResults(); // انتقل بمجرد إغلاق الإعلان
-                            ad.dispose();
-                          },
-                          onAdFailedToShowFullScreenContent: (ad, err) {
-                            navigateToResults(); // انتقل لو فشل العرض
-                            ad.dispose();
-                          },
-                        );
+                      onAdDismissedFullScreenContent: (ad) {
+                        navigateToResults();
+                        ad.dispose();
+                        interstitialAd = null;
+                        load(); // preload next ad so user can filter again
+                      },
+                      onAdFailedToShowFullScreenContent: (ad, err) {
+                        navigateToResults();
+                        ad.dispose();
+                        interstitialAd = null;
+                        load();
+                      },
+                    );
                     interstitialAd!.show();
                   } else {
                     navigateToResults();

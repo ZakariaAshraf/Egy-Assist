@@ -59,6 +59,8 @@ dependencies:
   connectivity_plus: ^7.0.0
   google_mobile_ads: ^6.0.0
   flutter_animate: ^4.5.2
+  share_plus: ^12.0.1
+  firebase_crashlytics: ^5.0.8
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +90,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/data.json
+    - shorebird.yaml
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

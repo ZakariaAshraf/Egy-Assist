@@ -341,12 +341,46 @@ abstract class AppLocalizations {
   /// **'Please fill all fields'**
   String get pleaseFillAllFields;
 
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email (e.g. name@gmail.com or name@hotmail.com)'**
   String get invalidEmail;
+
+  /// No description provided for @passwordRequirements.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must have:'**
   String get passwordRequirements;
+
+  /// No description provided for @passwordRequirementLength.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 8 characters'**
   String get passwordRequirementLength;
+
+  /// No description provided for @passwordRequirementUppercase.
+  ///
+  /// In en, this message translates to:
+  /// **'One uppercase letter (A-Z)'**
   String get passwordRequirementUppercase;
+
+  /// No description provided for @passwordRequirementLowercase.
+  ///
+  /// In en, this message translates to:
+  /// **'One lowercase letter (a-z)'**
   String get passwordRequirementLowercase;
+
+  /// No description provided for @passwordRequirementDigit.
+  ///
+  /// In en, this message translates to:
+  /// **'One number (0-9)'**
   String get passwordRequirementDigit;
+
+  /// No description provided for @passwordTooWeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Please make the password stronger (see requirements below)'**
   String get passwordTooWeak;
 
   /// No description provided for @orContinueWith.
@@ -424,7 +458,7 @@ abstract class AppLocalizations {
   /// No description provided for @searchOverDegrees.
   ///
   /// In en, this message translates to:
-  /// **'Search over 100 degrees'**
+  /// **'Search over 100 study programs'**
   String get searchOverDegrees;
 
   /// No description provided for @startNewSearch.
@@ -744,6 +778,8 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not available check website'**
   String get notAvailableCheckWebsite;
+
+  String get languageMoiCheckWebsite;
 
   /// No description provided for @deadline.
   ///
@@ -1272,6 +1308,13 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You must create an account to access this section.'**
   String get guestCreateAccountToAccess;
+
+  String shareProgramMessage({
+    required String programName,
+    required String universityName,
+    required String programLink,
+    required String appLink,
+  });
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

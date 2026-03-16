@@ -2,6 +2,7 @@
 plugins {
     // هنا بنعرف البلاجن ونسخته بس لسه مش بنشغله (apply false)
     id("com.google.gms.google-services") version "4.3.15" apply false
+    id("com.google.firebase.crashlytics") version "3.0.2" apply false
 }
 
 // 2. بعد كده الإعدادات التانية
