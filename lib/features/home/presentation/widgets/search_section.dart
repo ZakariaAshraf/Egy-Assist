@@ -1,11 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:study_path/core/cache/cache_helper.dart';
 import 'package:study_path/core/utils/screen_util.dart';
 import 'package:study_path/features/filter/presentation/screens/filter_screen.dart';
-import 'package:study_path/features/search/presentation/search_screen.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/utils/app_colors.dart';
 
@@ -45,12 +41,16 @@ class SearchSection extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),
             Positioned.directional(
               textDirection: direction,
               top: 100.h(context),
+              start: 6.w(context),
+              end: 6.w(context),
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: TextButton(
@@ -58,6 +58,9 @@ class SearchSection extends StatelessWidget {
                   child: Text(
                     l10n.searchOverDegrees,
                     style: theme.bodyMedium!.copyWith(color: AppColors.secondary),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.start,
                   ),
                 ),
               ),
@@ -82,14 +85,18 @@ class SearchSection extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          l10n.startNewSearch,
-                          style: theme.titleMedium!.copyWith(
-                            color: Colors.blueAccent.shade400,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17.sp(context),
-                          ),
-                        ).animate().fade().scale(duration: 640.ms),
+                        Expanded(
+                          child: Text(
+                            l10n.startNewSearch,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.titleMedium!.copyWith(
+                              color: Colors.blueAccent.shade400,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17.sp(context),
+                            ),
+                          ).animate().fade().scale(duration: 640.ms),
+                        ),
                         Container(
                           // height: 40,
                           // width: 64.w(context),

@@ -57,7 +57,7 @@ class OnboardingScreen extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                 SizedBox(height: 450.h(context)),
+                 SizedBox(height: 400.h(context)),
                 Text(
                   l10n.unlockEurope,
                   textAlign: TextAlign.center,
@@ -67,7 +67,7 @@ class OnboardingScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                 SizedBox(height: 10.h(context)),
+                 SizedBox(height: 5.h(context)),
                  Text(
                   l10n.onboardingDescription1,
                   textAlign: TextAlign.center,
@@ -87,7 +87,7 @@ class OnboardingScreen extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 450.h(context)),
+                SizedBox(height: 400.h(context)),
                 Text(
                   l10n.filterByWhatMatters,
                   textAlign: TextAlign.center,
@@ -96,7 +96,7 @@ class OnboardingScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                 SizedBox(height: 10.h(context)),
+                 SizedBox(height: 5.h(context)),
                  Text(
                   l10n.onboardingDescription2,
                   textAlign: TextAlign.center,
@@ -116,7 +116,7 @@ class OnboardingScreen extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 450.h(context)),
+                SizedBox(height: 400.h(context)),
                 Text(
                   l10n.yourFutureAwaits,
                   textAlign: TextAlign.center,
@@ -125,7 +125,7 @@ class OnboardingScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                 SizedBox(height: 10.h(context)),
+                 SizedBox(height: 5.h(context)),
                  Text(
                   l10n.onboardingDescription3,
                   textAlign: TextAlign.center,

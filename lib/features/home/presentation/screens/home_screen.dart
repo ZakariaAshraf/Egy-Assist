@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:study_path/core/utils/screen_util.dart';
 import 'package:study_path/features/home/presentation/widgets/saved_program_section.dart';
 import 'package:study_path/features/home/presentation/widgets/user_info_section.dart';
 import '../../../../core/widgets/custom_button.dart';
@@ -22,9 +23,9 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         children: [
           UserInfoSection(),
-          SizedBox(height: 10),
+          SizedBox(height: 15.h(context)),
           SearchSection(),
-          SizedBox(height: 10),
+          SizedBox(height: 15.h(context)),
           // CustomButton(title: "title", onTap: () {
           //   uploadDataToFirebase();
           // },),
@@ -59,9 +60,9 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(child: SavedProgramSection()),
-          SizedBox(height: 10),
+          SizedBox(height: 15.h(context)),
           SizedBox(child: ExploreDestinationSection().animate().fadeIn(duration: 600.ms)),
-          SizedBox(height: 20),
+          SizedBox(height: 30.h(context)),
 
         ],
       ),

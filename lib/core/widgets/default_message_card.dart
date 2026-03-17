@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:study_path/core/utils/screen_util.dart';
 
 import '../utils/app_colors.dart';
 
@@ -29,7 +30,7 @@ class DefaultMessageCard extends StatelessWidget {
               child: Text(
                 sign,
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: AppColors.primary, fontSize:  26),
+                    color: AppColors.primary, fontSize:  26.sp(context)),
               ).animate()
                   .fade(duration: 500.ms)
                   .scale(delay: 500.ms),
@@ -46,7 +47,7 @@ class DefaultMessageCard extends StatelessWidget {
                   title,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: 22,
+                      fontSize: 20.sp(context),
                       fontWeight: FontWeight.w600,
                      ),
                 ).animate()
@@ -60,7 +61,7 @@ class DefaultMessageCard extends StatelessWidget {
                   subTitle!,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize:20,
+                      fontSize:17.sp(context),
                       fontWeight: FontWeight.w400,color: Colors.grey),
                 ),
               ],

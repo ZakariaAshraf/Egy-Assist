@@ -349,49 +349,55 @@ class CountryDetailsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 18.h(context)),
+                  SizedBox(height: 12.h(context)),
                   // Divider(),
-                  Padding(
-                    padding: EdgeInsets.all(10.w(context)),
-                    child: Container(
-                      clipBehavior: Clip.antiAlias,
-                      height: 200.h(context),
-                      width: 400.w(context),
-                      decoration: BoxDecoration(
-                        color: Colors.blueAccent,
-                        borderRadius: BorderRadius.circular(30.r(context)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            textAlign:TextAlign.center,
-                            l10n.readyToStartJourney,
-                            style: theme.titleLarge!.copyWith(
-                              fontSize: 28.sp(context),
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                   Padding(
+                     padding: const EdgeInsets.all(25),
+                     child: Container(
+                        padding: EdgeInsets.all(30.w(context)),
+                        clipBehavior: Clip.antiAlias,
+                        // height: 200.h(context),
+                        // width: 400.w(context),
+                        decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          borderRadius: BorderRadius.circular(30.r(context)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              textAlign:TextAlign.center,
+                              l10n.readyToStartJourney,
+                              style: theme.titleLarge!.copyWith(
+                                fontSize: 28.sp(context),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                          Text(
-                            l10n.findOpenProgramsAndApply,
-                            style: theme.titleMedium!.copyWith(
-                              color: Colors.white60,
+                            Text(
+                              l10n.findOpenProgramsAndApply,
+                              style: theme.titleMedium!.copyWith(
+                                color: Colors.white60,
+                              ),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                          SizedBox(height: 10.h(context)),
-                          CustomButton(title: l10n.browsePrograms, onTap: (){
-                            Navigator.pop(context);
-                          },color: Colors.white,isInvert: false,textStyle: theme.titleLarge!.copyWith(
-                            color: Colors.blueAccent,
-                          ),)
-                        ],
-                      ),
-                    ),
-                  ).animate()
-                      .fade(duration: 500.ms)
-                      .slideX(delay: 300.ms),
+                            SizedBox(height: 10.h(context)),
+                            CustomButton(title: l10n.browsePrograms, onTap: (){
+                              Navigator.pop(context);
+                            },color: Colors.white,isInvert: false,textStyle: theme.titleLarge!.copyWith(
+                              color: Colors.blueAccent,
+                            ),width: 240.w(context),height: 80.h(context),)
+                          ],
+                        ),
+                      ).animate()
+                        .fade(duration: 500.ms)
+                        .slideX(delay: 300.ms),
+                   ),
                 ],
               ),
             ),

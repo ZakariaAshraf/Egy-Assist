@@ -107,15 +107,20 @@ class MyApp extends ConsumerWidget {
           final textDirection = locale?.languageCode == 'ar'
               ? TextDirection.rtl
               : TextDirection.ltr;
-          return Directionality(
-            textDirection: textDirection,
-            child: Theme(
-              data: currentTheme.copyWith(
-                textTheme: isDark
-                    ? AppTextTheme.darkTextTheme(context)
-                    : AppTextTheme.lightTextTheme(context),
+          final mq = MediaQuery.of(context);
+          final clampedScaler = mq.textScaler.clamp(maxScaleFactor: 1.15);
+          return MediaQuery(
+            data: mq.copyWith(textScaler: clampedScaler),
+            child: Directionality(
+              textDirection: textDirection,
+              child: Theme(
+                data: currentTheme.copyWith(
+                  textTheme: isDark
+                      ? AppTextTheme.darkTextTheme(context)
+                      : AppTextTheme.lightTextTheme(context),
+                ),
+                child: ConnectivityOverlay(child: child!),
               ),
-              child: ConnectivityOverlay(child: child!),
             ),
           );
         },
