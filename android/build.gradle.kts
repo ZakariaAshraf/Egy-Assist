@@ -1,7 +1,8 @@
 // 1. البلاجنز لازم تكون في الأول خالص
 plugins {
     // هنا بنعرف البلاجن ونسخته بس لسه مش بنشغله (apply false)
-    id("com.google.gms.google-services") version "4.3.15" apply false
+    // Crashlytics Gradle plugin v3 requires Google Services 4.4.1+
+    id("com.google.gms.google-services") version "4.4.1" apply false
     id("com.google.firebase.crashlytics") version "3.0.2" apply false
 }
 
